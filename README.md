@@ -4,9 +4,9 @@ Utilities for VoxelAI jobspec containers
 
 [![PyPI Version](https://img.shields.io/pypi/v/vai-jobspec-tools.svg)](https://pypi.org/project/vai-jobspec-tools/)
 [![codecov](https://codecov.io/gh/voxelai/vai-jobspec-tools/branch/main/graph/badge.svg?token=ZX37CSBE50)](https://codecov.io/gh/voxelai/vai-jobspec-tools)
-[![Tests](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/test.yaml/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/test.yaml)
-[![Code Style](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/lint.yaml/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/lint.yaml)
-[![Type Check](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/type-check.yaml/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/type-check.yaml)
+[![Tests](https://github.com/voxelai/vai-jobspec-tools/workflows/Tests/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/test.yaml)
+[![Code Style](https://github.com/voxelai/vai-jobspec-tools/workflows/Code%20Style/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/lint.yaml)
+[![Type Check](https://github.com/voxelai/vai-jobspec-tools/workflows/Type%20Check/badge.svg)](https://github.com/voxelai/vai-jobspec-tools/actions/workflows/type-check.yaml)
 
 ## Installation
 
