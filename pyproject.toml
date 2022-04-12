@@ -4,6 +4,12 @@ version = "0.1.0"
 description = "Utilities for VoxelAI jobspec containers"
 authors = ["Andrew Ross <andrew.ross.mail@gmail.com>"]
 
+readme = "README.md"
+
+homepage = "https://github.com/voxelai/vai-jobspec-tools"
+repository = "https://github.com/voxelai/vai-jobspec-tools"
+documentation = "https://github.com/voxelai/vai-jobspec-tools"
+
 [tool.poetry.dependencies]
 python = "^3.8"
 
