@@ -26,6 +26,11 @@ def configure_logger(
     verbosity: int = 0,
     level: int | None = None,
 ):
+    """Configure a logger with a level and custom stream handler.
+
+    IMPORTANT: Calling this function more than once on a logger will
+    result in multiple stream handlers with be added.
+    """
     _level = max(logging.WARNING - verbosity * 10, 0) if level is None else level
     logger.setLevel(_level)
     fmt = "%(asctime)s - %(levelname)s - %(module)s:%(lineno)d - %(message)s"
@@ -37,6 +42,14 @@ def configure_logger(
 
 @contextlib.contextmanager
 def optional_temporary_directory(workdir: str | Path | None = None) -> Iterator[Path]:
+    """Create a temporary directory if one is not provided.
+
+    If `workdir` is `None` a temporary directory is created and returned. The
+    created directory and its contents are deleted when exiting the context.
+
+    `ValueError` is raised if `workdir` points to a non-existant directory or
+    if it points to something that is not a directory.
+    """
     if workdir is None:
         with tempfile.TemporaryDirectory() as _workdir:
             yield Path(_workdir)
@@ -54,7 +67,24 @@ def prepare_dst_uri(
     session_id: str,
     pipeline_name: str,
     pipeline_version: str,
+    *,
+    create: bool = True,
 ) -> str:
+    """Generate a URI scoped to a particular subject, session, pipeline, and version.
+
+    `uri` can be a google storage URI, for example: `gs://my-bkt` or
+    `gs://my-bkt/sub/folder`, it can also point to a local directory, for
+    example: `./my/folder` or `file:///my/abs/folder`.
+
+    The result is the same with and without a trailing slash.
+
+    IMPORTANT: If `uri` is a local directory and `create` is `True` (the default)
+    then the resulting intermediate folders are created.
+
+    Examples:
+        >>> prepare_dst_uri('gs://bkt/folder', 'sub1', 'ses2', 'fake-pipe', '0.0.0')
+        'gs://bkt/folder/sub1/ses2/fake-pipe/0.0.0'
+    """
     pipeline_folder = _create_pipeline_folder_path(
         subject_id,
         session_id,
@@ -64,7 +94,7 @@ def prepare_dst_uri(
     dst_uri = op.join(uri, pipeline_folder)
     # if local path then create the intermediate directories
     _uri = urlparse(dst_uri)
-    if _uri.scheme in ("", "file"):
+    if _uri.scheme in ("", "file") and create:
         os.makedirs(_uri.path, exist_ok=True)
 
     return dst_uri
@@ -81,6 +111,7 @@ def _create_pipeline_folder_path(
 
 def lowercase_alnum(s: str) -> str:
     """Transform a string so that it contains only lowercase alphanumeric characters.
+
     Examples:
         >>> lowercase_alnum('Hello, World!')
         'helloworld'
