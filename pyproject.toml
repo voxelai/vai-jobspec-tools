@@ -6,7 +6,6 @@ authors = ["Andrew Ross <andrew.ross.mail@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-google-cloud-storage = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
