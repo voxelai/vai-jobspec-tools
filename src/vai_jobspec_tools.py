@@ -21,7 +21,10 @@ __all__ = (
 
 
 def configure_logger(
-    logger: logging.Logger, *, verbosity: int = 0, level: int | None = None
+    logger: logging.Logger,
+    *,
+    verbosity: int = 0,
+    level: int | None = None,
 ):
     _level = max(logging.WARNING - verbosity * 10, 0) if level is None else level
     logger.setLevel(_level)
@@ -41,7 +44,7 @@ def optional_temporary_directory(workdir: str | Path | None = None) -> Iterator[
         yield Path(workdir)
     else:
         raise ValueError(
-            f"'workdir' must be an existing directory or None. Found [{workdir}]"
+            f"'workdir' must be an existing directory or None. Found [{workdir}]",
         )
 
 
@@ -53,7 +56,10 @@ def prepare_dst_uri(
     pipeline_version: str,
 ) -> str:
     pipeline_folder = _create_pipeline_folder_path(
-        subject_id, session_id, pipeline_name, pipeline_version
+        subject_id,
+        session_id,
+        pipeline_name,
+        pipeline_version,
     )
     dst_uri = op.join(uri, pipeline_folder)
     # if local path then create the intermediate directories
@@ -65,7 +71,10 @@ def prepare_dst_uri(
 
 
 def _create_pipeline_folder_path(
-    subject_id: str, session_id: str, pipeline_name: str, pipeline_version: str
+    subject_id: str,
+    session_id: str,
+    pipeline_name: str,
+    pipeline_version: str,
 ):
     return op.join(subject_id, session_id, pipeline_name, pipeline_version)
 

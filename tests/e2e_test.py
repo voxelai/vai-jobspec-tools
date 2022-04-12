@@ -77,7 +77,9 @@ def test_configure_logger_level(logger: logging.Logger, level, expected_level):
     ],
 )
 def test_configure_logger_level_params_override_verbosity_param(
-    logger: logging.Logger, level, expected_level
+    logger: logging.Logger,
+    level,
+    expected_level,
 ):
     assert logger.level == logging.NOTSET
     assert len(logger.handlers) == 0
@@ -106,7 +108,7 @@ def test_optional_temporary_directory_explicit_directory(tmp_path: Path):
 
 def test_optional_temporary_directory_raises_if_param_does_not_exist():
     with pytest.raises(ValueError):
-        with optional_temporary_directory("/some/fake/dir/xyz/") as tmpdir:
+        with optional_temporary_directory("/some/fake/dir/xyz/"):
             ...
 
 
@@ -117,7 +119,7 @@ def test_optional_temporary_directory_raises_if_param_exists_but_not_dir(
     tmp_file.write_text("")
 
     with pytest.raises(ValueError):
-        with optional_temporary_directory(tmp_file) as tmpdir:
+        with optional_temporary_directory(tmp_file):
             ...
 
 
