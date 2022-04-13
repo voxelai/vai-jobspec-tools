@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vai-jobspec-tools"
-version = "0.1.0"
+version = "1.0.0"
 description = "Utilities for VoxelAI jobspec containers"
 authors = ["Andrew Ross <andrew.ross.mail@gmail.com>"]
 
