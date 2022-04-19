@@ -12,7 +12,6 @@ documentation = "https://github.com/voxelai/vai-jobspec-tools"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-importlib-metadata = { version = "^4", python = "~3.7"}
 
 
 [tool.poetry.dev-dependencies]
