@@ -47,10 +47,11 @@ def prepare_dst_uri(
     session_id: str,
     pipeline_name: str,
     pipeline_version: str,
+    job_id: str,
     *,
     create: bool = True,
 ) -> str:
-    """Generate a URI scoped to a particular subject, session, pipeline, and version."""
+    """Generate a URI scoped to a particular subject, session, pipeline, version and job"""
     ...
 
 
