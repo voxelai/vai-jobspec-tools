@@ -129,13 +129,14 @@ class PrepareDstUriArgs(NamedTuple):
     session_id: str
     pipeline_name: str
     pipeline_version: str
+    job_id: str
 
 
 @pytest.mark.parametrize("scheme", ["", "file"])
 def test_prepare_dst_uri_local_file(scheme: str, tmp_path: Path):
     components = (scheme, "", str(tmp_path / "a" / "b"), "", "", "")
     uri = urlunparse(components)
-    parts = PrepareDstUriArgs(uri, "sub1", "ses1", "fake-pipe", "0.0.0")
+    parts = PrepareDstUriArgs(uri, "sub1", "ses1", "fake-pipe", "0.0.0", "001")
     expected_uri = op.join(*parts)
     expected_path = urlparse(expected_uri).path
 
@@ -151,7 +152,7 @@ def test_prepare_dst_uri_local_file(scheme: str, tmp_path: Path):
 @pytest.mark.parametrize("suffix", ["", "/"])
 def test_prepare_dst_uri_remote_file(uri: str, suffix: str):
     _uri = f"{uri}{suffix}"
-    parts = PrepareDstUriArgs(_uri, "sub1", "ses1", "fake-pipe", "0.0.0")
+    parts = PrepareDstUriArgs(_uri, "sub1", "ses1", "fake-pipe", "0.0.0", "001")
     expected_uri = op.join(*parts)
 
     dst_uri = prepare_dst_uri(*parts)
