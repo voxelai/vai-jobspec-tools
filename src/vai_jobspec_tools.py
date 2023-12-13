@@ -67,6 +67,7 @@ def prepare_dst_uri(
     session_id: str,
     pipeline_name: str,
     pipeline_version: str,
+    job_id: str,
     *,
     create: bool = True,
 ) -> str:
@@ -82,14 +83,17 @@ def prepare_dst_uri(
     then the resulting intermediate folders are created.
 
     Examples:
-        >>> prepare_dst_uri('gs://bkt/folder', 'sub1', 'ses2', 'fake-pipe', '0.0.0')
-        'gs://bkt/folder/sub1/ses2/fake-pipe/0.0.0'
+        >>> prepare_dst_uri(
+        ...    'gs://bkt/folder', 'sub1', 'ses2', 'fake-pipe', '0.0.0', '001'
+        ... )
+        'gs://bkt/folder/sub1/ses2/fake-pipe/0.0.0/001'
     """
     pipeline_folder = _create_pipeline_folder_path(
         subject_id,
         session_id,
         pipeline_name,
         pipeline_version,
+        job_id,
     )
     dst_uri = op.join(uri, pipeline_folder)
     # if local path then create the intermediate directories
@@ -105,8 +109,9 @@ def _create_pipeline_folder_path(
     session_id: str,
     pipeline_name: str,
     pipeline_version: str,
+    job_id: str,
 ):
-    return op.join(subject_id, session_id, pipeline_name, pipeline_version)
+    return op.join(subject_id, session_id, pipeline_name, pipeline_version, job_id)
 
 
 def lowercase_alnum(s: str) -> str:
